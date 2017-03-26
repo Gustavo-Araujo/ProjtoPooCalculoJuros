@@ -16,7 +16,7 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author Gustavo
  */
-public class HomeServlet extends HttpServlet {
+public class JurosSimplesServlet extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -35,12 +35,30 @@ public class HomeServlet extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet HomeServlet</title>");            
+            out.println("<title>Servlet JurosSimplesServlet</title>");            
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>Servlet HomeServlet at " + request.getContextPath() + "</h1>");
-            out.println("<h4><a href='JurosSimplesServlet'>Juros Simples</a></h4>");
-            out.println("<h4><a href='index.html'>Juros Composto</a></h4>");
+            out.println("<h1>Servlet JurosSimplesServlet at " + request.getContextPath() + "</h1>");
+            
+            out.println("<form name = 'FormSimples' method = 'get' action = 'JurosSimplesServlet'>");
+            out.println("<h2>Qual o valor que deseja consultar?</h2>");
+            out.println("</br><input type='text' name='valor'/>");
+            out.println("<h2>Qual a taxa que deseja aplicar?</h2>");
+            out.println("</br><input type='text' name='taxa'/></br>");
+            out.println("<h2>Qual o perído em meses?</h2>");
+            out.println("</br><input type='text' name='periodo'/></br>");
+            out.println("</br><input type='submit' value='Calcular'/></br>");
+            out.println("</form>");
+            
+            double valor = Double.parseDouble(request.getParameter("valor"));
+            double taxa = Double.parseDouble(request.getParameter("taxa"));
+            double periodo = Double.parseDouble(request.getParameter("periodo"));
+            
+            double resultado = (valor*taxa*periodo);
+            
+            out.println("<td>O montante"+valor+" aplicado a taxa de "+taxa+" meses, pelo período de "+resultado+" resultará em: "+resultado+"</td>");
+            
+            out.println("</br><h4><a href='HomeServlet'>Voltar</a></h4>");
             out.println("</body>");
             out.println("</html>");
         }
