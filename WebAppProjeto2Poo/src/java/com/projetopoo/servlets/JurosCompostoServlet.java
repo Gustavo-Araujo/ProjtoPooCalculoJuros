@@ -5,45 +5,88 @@
  */
 package com.projetopoo.servlets;
 
+import java.lang.Math;
 import java.io.IOException;
 import java.io.PrintWriter;
 import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 /**
  *
- * @author Gustavo
+ * @author Lipaum
  */
-public class HomeServlet extends HttpServlet {
-
-    /**
-     * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
-     * methods.
-     *
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
-     */
+@WebServlet(name = "JurosCompostoServlet", urlPatterns = {"/JurosCompostoServlet"})
+public class JurosCompostoServlet extends HttpServlet {
+    
+   
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
             /* TODO output your page here. You may use following sample code. */
-            out.println("<!DOCTYPE html>");
+             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet HomeServlet</title>");            
+            out.println("<title>Servlet JurosCompostoServlet</title>");            
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>Servlet HomeServlet at " + request.getContextPath() + "</h1>");
-            out.println("<h4><a href='JurosSimplesServlet'>Juros Simples</a></h4>");
-            out.println("<h4><a href='JurosCompostoServlet'>Juros Composto</a></h4>");
-        
+            out.println("<h1>Juros Composto </h1>");
+            
+            
+                  
+             int mes = 1;
+             double m = 0;
+            double c = 0;
+            double p = 0;
+            double t = 0;
+            double ta1 = 0;
+            double aux = 0;
+            
+            
+            
+            
+            
+             
+             try{ 
+            m = Double.parseDouble(request.getParameter("montante"));
+            c = Double.parseDouble(request.getParameter("capital"));
+            p = Double.parseDouble(request.getParameter("periodo"));
+            t = Double.parseDouble(request.getParameter("taxa"));
+            aux = Double.parseDouble(request.getParameter("auxiliar"));
+            ta1 = Double.parseDouble(request.getParameter("taxaauxiliar"));
+             ta1 = t/100;
+              aux = ta1 +1 ;
+              m = c * Math.pow(aux,p);
+                
+                
+              out.println("<table border='1'>");
+                       
+             }catch(Exception ex) {}
+             out.println("<form>");   
+             out.println("Juros Composto");
+             out.println("</br><input type='text' name='valor' value='"+c+"'/>"); 
+             out.println("</br><input type='text' name='periodo' value='"+p+"'/>");
+            out.println("</br><input type='text' name='taxa' value='"+t+"'/>");
+             
+             out.println("<input type='submit' value='calcular'/>"); 
+             out.println("</form>");
+             out.println("</br>"); 
+             out.println("<table border='1'>"); 
+              
+                out.println("<tr>");  
+                out.println("<td>"+m+"</td>"); 
+                out.println("<td>"+m+"</td>"); 
+                out.println("</tr>");  
+                  out.println("</br><h4><a href='HomeServlet'>Voltar</a></h4>");
+            out.println("</table>");
             out.println("</body>");
             out.println("</html>");
+            
+            
+      
         }
     }
 
